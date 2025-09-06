@@ -8,8 +8,8 @@
 <style>
 /* Reset & base */
 * { margin:0; padding:0; box-sizing:border-box; cursor:none; }
-html { scroll-behavior: smooth; }
-body { font-family:'Inter', sans-serif; background:#000; color:#fff; line-height:1.6; overflow-x:hidden; }
+body { font-family:'Inter', sans-serif; background:#000; color:#fff; line-height:1.6; overflow:hidden; }
+html, body { width:100%; height:100%; }
 
 /* Variables */
 :root {
@@ -32,9 +32,6 @@ a { text-decoration:none; color:inherit; }
   mix-blend-mode:screen;
 }
 
-/* Sparks */
-#sparks { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9998; }
-
 /* Hero */
 header {
   height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
@@ -49,58 +46,38 @@ header::after {
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--section-bg) 100%);
   z-index:2;
 }
-.smoke { 
-  position:absolute; width:200%; height:200%; top:-50%; left:-50%; 
-  background: radial-gradient(circle, rgba(255,140,0,0.08), transparent 50%); 
-  filter: blur(40px); animation: drift 25s infinite linear; 
-}
-@keyframes drift { 0%{transform:translate(0,0);} 50%{transform:translate(50px,-30px);} 100%{transform:translate(0,0);} }
 
 /* Hero text */
-header h1, header p, .hero-buttons { position:relative; z-index:3; }
 header h1 { font-family:'Orbitron', sans-serif; font-size:4rem;
   background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800,0 0 18px #ff1f00;
-  margin-bottom:1rem; animation:flicker 1.5s infinite alternate;
-}
-@keyframes flicker { 0%{text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800,0 0 18px #ff1f00;} 50%{text-shadow:0 0 4px #ff4d00,0 0 10px #ffb800,0 0 14px #ff1f00;} 100%{text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800,0 0 18px #ff1f00;} }
-header p { font-size:1.5rem; margin:1rem 0 2rem; color:#ddd; }
+  text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800,0 0 18px #ff1f00; margin-bottom:1rem; transition:0.3s; }
+header p { font-size:1.5rem; margin:1rem 0 2rem; color:#ddd; transition:0.3s; }
 
 /* Hero buttons */
-.hero-buttons { display:flex; gap:1.5rem; }
+.hero-buttons { display:flex; gap:1.5rem; transition:0.3s; }
 .hero-buttons a {
   padding:0.8rem 2rem; border-radius:8px; font-weight:600; text-transform:uppercase;
   border:2px solid #ffb800; color:#ffb800;
   box-shadow:0 0 8px #ffb800,0 0 16px #ff4d00; position:relative; transition:0.3s;
 }
-.hero-buttons a::after {
-  content:''; position:absolute; top:-5px; left:-5px; right:-5px; bottom:-5px;
-  border-radius:12px; opacity:0;
-  background:linear-gradient(45deg,#ff4d00,#ffb800,#ff1f00);
-  filter:blur(8px); z-index:-1; transition:0.3s;
-}
-.hero-buttons a:hover::after { opacity:1; }
 .hero-buttons a:hover { transform:scale(1.05); box-shadow:0 0 16px #ffb800,0 0 32px #ff4d00; }
 
 /* Sections */
-section { padding:5rem 2rem; max-width:1200px; margin:2rem auto; background:var(--section-bg); border-radius:12px; position:relative; overflow:hidden; opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
-section.visible { opacity:1; transform:translateY(0); }
+section { padding:5rem 2rem; max-width:1200px; margin:2rem auto; background:var(--section-bg); border-radius:12px; position:relative; transition:all 0.5s ease; }
 section h2 { font-family:'Orbitron', sans-serif; font-size:2.5rem; margin-bottom:2rem; text-align:center;
-  background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800,0 0 18px #ff1f00; }
+  background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 
 /* Cards */
 .card-container { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
-.card { background:#111; padding:1.5rem; border-radius:12px; box-shadow:0 0 8px #ffb800,0 0 16px #ff4d00; transition: transform 0.3s, box-shadow 0.3s; opacity:0; transform:translateY(30px); }
-.card.visible { opacity:1; transform:translateY(0); }
+.card { background:#111; padding:1.5rem; border-radius:12px; box-shadow:0 0 8px #ffb800,0 0 16px #ff4d00; transition:all 0.3s ease; }
 .card:hover { transform:translateY(-5px); box-shadow:0 0 20px #ffb800,0 0 40px #ff4d00; }
-.card h3 { font-family:'Orbitron', sans-serif; margin-bottom:0.5rem; color:#fff; background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800; }
+.card h3 { font-family:'Orbitron', sans-serif; margin-bottom:0.5rem; color:#fff; background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .card p { color:#ccc; }
 
 /* Images */
 .image-row { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:2rem; }
-.image-row img, #build-image img { max-width:300px; width:100%; border:4px solid #ffb800; border-radius:12px; box-shadow:0 0 8px #ffb800,0 0 16px #ff4d00; cursor:pointer; transition:0.5s; }
-.image-row img:hover, #build-image img:hover { transform:scale(1.05) rotate(2deg); }
+.image-row img, #build-image img { max-width:300px; width:100%; border:4px solid #ffb800; border-radius:12px; box-shadow:0 0 8px #ffb800,0 0 16px #ff4d00; cursor:pointer; transition:transform 0.3s ease; }
+.image-row img:hover, #build-image img:hover { transform:scale(1.05); }
 
 /* Build */
 #build-image { display:flex; justify-content:center; align-items:center; padding:5rem 2rem; position:relative; overflow:hidden; }
@@ -108,9 +85,8 @@ section h2 { font-family:'Orbitron', sans-serif; font-size:2.5rem; margin-bottom
 /* Timeline */
 .timeline { position:relative; padding-left:2rem; margin:2rem 0; }
 .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:4px; background:#ffb800; }
-.timeline-item { position:relative; margin-bottom:2rem; opacity:0; transform:translateX(-30px); transition:0.6s ease; }
-.timeline-item.visible { opacity:1; transform:translateX(0); }
-.timeline-item h4 { margin-bottom:0.5rem; font-family:'Orbitron', sans-serif; color:#fff; background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 0 6px #ff4d00,0 0 12px #ffb800; }
+.timeline-item { position:relative; margin-bottom:2rem; transition:all 0.5s ease; }
+.timeline-item h4 { margin-bottom:0.5rem; font-family:'Orbitron', sans-serif; color:#fff; background:var(--fire-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .timeline-item p { color:#ccc; }
 .timeline-item::before { content:''; position:absolute; left:-12px; top:0; width:24px; height:24px; background:#ffb800; border-radius:50%; border:4px solid var(--bg); }
 
@@ -127,13 +103,11 @@ footer { background:var(--section-bg); padding:3rem 2rem; text-align:center; col
 </head>
 <body>
 
-<!-- Cursor and Sparks -->
+<!-- Cursor -->
 <div id="cursor"></div>
-<div id="sparks"></div>
 
 <!-- Hero -->
 <header>
-  <div class="smoke"></div>
   <h1>TA Hellmode Guide</h1>
   <p>Complete strategies, builds, and phase breakdowns</p>
   <div class="hero-buttons">
@@ -171,11 +145,6 @@ footer { background:var(--section-bg); padding:3rem 2rem; text-align:center; col
     <div class="card"><h3>Interrupt</h3><p>Stop enemies casting spells at the right moment.</p></div>
     <div class="card"><h3>AoE Awareness</h3><p>Position carefully to avoid damage zones.</p></div>
   </div>
-  <div class="image-row">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Mechanics Image">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Mechanics Image">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Mechanics Image">
-  </div>
 </section>
 
 <!-- Phases -->
@@ -185,11 +154,6 @@ footer { background:var(--section-bg); padding:3rem 2rem; text-align:center; col
     <div class="timeline-item"><h4>Phase 1</h4><p>Initial wave with basic mechanics.</p></div>
     <div class="timeline-item"><h4>Phase 2</h4><p>Increased difficulty, watch positioning.</p></div>
     <div class="timeline-item"><h4>Phase 3</h4><p>Final phase with boss mechanics.</p></div>
-  </div>
-  <div class="image-row">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Phase Image">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Phase Image">
-    <img src="images/Rocket-League-Header-3-min.png" alt="Phase Image">
   </div>
 </section>
 
@@ -202,30 +166,9 @@ footer { background:var(--section-bg); padding:3rem 2rem; text-align:center; col
 <div id="lightbox"><img src="" alt="Expanded Image"></div>
 
 <script>
-// Intersection Observer for scroll animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-}, {threshold:0.2});
-document.querySelectorAll('section, .card, .timeline-item').forEach(el => observer.observe(el));
-
-// Cursor
+// Custom cursor
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
-
-// Sparks
-const sparksContainer = document.getElementById('sparks');
-function createSpark(x,y){
-  const spark = document.createElement('div');
-  spark.className='particle';
-  const size=Math.random()*4+2;
-  spark.style.width=size+'px';
-  spark.style.height=size+'px';
-  spark.style.left=(x+Math.random()*10-5)+'px';
-  spark.style.top=(y+Math.random()*10-5)+'px';
-  sparksContainer.appendChild(spark);
-  setTimeout(()=>spark.remove(),1500);
-}
-document.addEventListener('mousemove', e=>{ createSpark(e.clientX,e.clientY); });
 
 // Lightbox
 const lightbox = document.getElementById('lightbox');
