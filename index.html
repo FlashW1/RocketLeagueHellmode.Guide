@@ -13,17 +13,17 @@
             font-family: 'Arial', sans-serif;
         }
 
-        body {
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Disable scrolling */
         }
 
-        /* Hero Section */
+        /* Hero / Dashboard */
         .hero {
-            height: 100vh;
+            height: 100%;
             width: 100%;
-            background: linear-gradient(135deg, #a13538, #000);
+            background: url('placeholder-background.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,36 +32,51 @@
             position: relative;
         }
 
+        /* Overlay for gradient/glow effect */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
         .hero h1 {
             font-size: 5rem;
             text-transform: uppercase;
             letter-spacing: 5px;
             color: #fff;
             text-shadow: 0 0 20px #a13538, 0 0 40px #fff;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .hero p {
             font-size: 1.5rem;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             color: #f0f0f0;
         }
 
         /* Glowing Buttons */
-        .hero .btn {
-            padding: 15px 40px;
-            margin: 10px;
+        .btn {
+            padding: 20px 50px;
+            margin: 15px;
             font-size: 1.2rem;
             color: #fff;
             text-decoration: none;
             border: 2px solid #a13538;
-            border-radius: 10px;
+            border-radius: 15px;
             background: transparent;
             position: relative;
             transition: all 0.3s ease;
         }
 
-        .hero .btn::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: -5px; left: -5px;
@@ -72,203 +87,33 @@
             opacity: 0;
             transition: all 0.3s ease;
             z-index: -1;
-            border-radius: 12px;
+            border-radius: 17px;
         }
 
-        .hero .btn:hover::before {
+        .btn:hover::before {
             opacity: 1;
         }
 
-        .hero .btn:hover {
+        .btn:hover {
             background: #a13538;
             color: #fff;
             box-shadow: 0 0 20px #a13538, 0 0 40px #fff;
         }
-
-        /* Navigation / Section Links */
-        .sections {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .section-link {
-            background: #111;
-            color: #a13538;
-            padding: 15px 25px;
-            margin: 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px #a13538;
-        }
-
-        .section-link:hover {
-            background: #a13538;
-            color: #000;
-            box-shadow: 0 0 20px #fff, 0 0 40px #a13538;
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 20px;
-            background: #111;
-        }
-
-        section h2 {
-            text-align: center;
-            font-size: 3rem;
-            color: #a13538;
-            margin-bottom: 40px;
-            text-shadow: 0 0 10px #a13538;
-        }
-
-        .content {
-            max-width: 1000px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .content img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-        }
-
-        /* Grid for Guides / Requirements */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: #222;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px #a13538;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 25px #fff, 0 0 40px #a13538;
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .card p {
-            color: #ddd;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #000;
-            color: #a13538;
-            text-shadow: 0 0 10px #a13538;
-        }
-
-        /* Smooth Scroll Behavior */
-        html {
-            scroll-behavior: smooth;
-        }
     </style>
 </head>
 <body>
-
-    <!-- HERO / Landing Page -->
     <div class="hero">
-        <h1>ROCKET LEAGUE</h1>
-        <p>Grow Castle Guild - Join the Best</p>
-        <div class="sections">
-            <a href="#overview" class="section-link">Overview</a>
-            <a href="#requirements" class="section-link">Requirements</a>
-            <a href="#join" class="section-link">How to Join</a>
-            <a href="#guides" class="section-link">Exclusive Guides</a>
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>ROCKET LEAGUE</h1>
+            <p>Grow Castle Guild</p>
+            <div class="buttons">
+                <a href="overview.html" class="btn">Overview</a>
+                <a href="requirements.html" class="btn">Requirements</a>
+                <a href="join.html" class="btn">How to Join</a>
+                <a href="guides.html" class="btn">Exclusive Guides</a>
+            </div>
         </div>
     </div>
-
-    <!-- Overview Section -->
-    <section id="overview">
-        <h2>Guild Overview</h2>
-        <div class="content">
-            <img src="placeholder-overview.jpg" alt="Guild Overview">
-            <p>Welcome to the ROCKET LEAGUE guild! We are a top-tier guild in Grow Castle focused on teamwork, strategy, and dominating the game. Our community is active, supportive, and always growing. Join us to become part of something legendary!</p>
-        </div>
-    </section>
-
-    <!-- Requirements Section -->
-    <section id="requirements">
-        <h2>Requirements</h2>
-        <div class="content grid">
-            <div class="card">
-                <h3>Level Requirement</h3>
-                <p>Minimum player level: 50</p>
-            </div>
-            <div class="card">
-                <h3>Active Players</h3>
-                <p>Must participate in guild events at least 3 times per week.</p>
-            </div>
-            <div class="card">
-                <h3>Communication</h3>
-                <p>Active on Discord and in-game chat is mandatory for strategy coordination.</p>
-            </div>
-            <div class="card">
-                <h3>Contribution</h3>
-                <p>Members must contribute to guild upgrades and events consistently.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- How to Join Section -->
-    <section id="join">
-        <h2>How to Join</h2>
-        <div class="content">
-            <img src="placeholder-join.jpg" alt="How to Join">
-            <p>To join ROCKET LEAGUE, send a message on Discord to one of our officers or apply directly in-game. Make sure to include your level, play style, and why you want to be part of our elite guild. We value dedication and teamwork above all!</p>
-        </div>
-    </section>
-
-    <!-- Exclusive Guides Section -->
-    <section id="guides">
-        <h2>Exclusive Guides</h2>
-        <div class="content grid">
-            <div class="card">
-                <h3>Guild Event Strategies</h3>
-                <p>Learn how to maximize rewards in guild events and dominate the leaderboards.</p>
-            </div>
-            <div class="card">
-                <h3>Hero Optimization</h3>
-                <p>Tips for leveling and optimizing your heroes to outperform in battles.</p>
-            </div>
-            <div class="card">
-                <h3>Castle Defense Techniques</h3>
-                <p>Advanced defense setups for protecting your castle from tough opponents.</p>
-            </div>
-            <div class="card">
-                <h3>Resource Management</h3>
-                <p>Learn to manage resources efficiently to always stay ahead in the game.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 ROCKET LEAGUE Guild - Grow Castle. All Rights Reserved.
-    </footer>
-
 </body>
 </html>
