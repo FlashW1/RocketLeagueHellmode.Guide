@@ -10,21 +10,29 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* no scrolling */
+            overflow: hidden;
+            background: #000;
         }
 
         /* Background Image */
         body {
             background: url('images/Rocket-League-Header-3-min.png') no-repeat center center/cover;
+            position: relative;
+            animation: slowZoom 30s ease-in-out infinite alternate;
         }
 
-        /* Overlay to darken the image for better button contrast */
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        /* Dark overlay for contrast */
         body::before {
             content: '';
             position: fixed;
@@ -34,24 +42,25 @@
             z-index: 0;
         }
 
-        /* Top Navigation Bar */
+        /* Navigation Bar */
         nav {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 30px;
+            gap: 35px;
             z-index: 1;
         }
 
         nav a {
-            padding: 15px 25px;
+            padding: 15px 30px;
             color: #fff;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 2px solid #a13538;
-            font-weight: bold;
+            font-weight: 600;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -59,15 +68,15 @@
         nav a::before {
             content: '';
             position: absolute;
-            top: -5px; left: -5px;
-            width: calc(100% + 10px);
-            height: calc(100% + 10px);
+            top: -6px; left: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
             background: #a13538;
-            filter: blur(15px);
+            filter: blur(20px);
             opacity: 0;
             transition: all 0.3s ease;
             z-index: -1;
-            border-radius: 12px;
+            border-radius: 15px;
         }
 
         nav a:hover::before {
@@ -77,32 +86,40 @@
         nav a:hover {
             background: #a13538;
             color: #000;
-            box-shadow: 0 0 20px #fff, 0 0 40px #a13538;
+            box-shadow: 0 0 20px #fff, 0 0 50px #a13538;
+            transform: translateY(-2px);
         }
 
-        /* Center content placeholder (optional) */
-        .hero-content {
+        /* Floating subtle particle effect */
+        .particles {
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            position: relative;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        /* Optional subtle animation to make it feel alive */
-        body {
-            animation: slightZoom 20s ease-in-out infinite alternate;
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #a13538;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatUp linear infinite;
         }
 
-        @keyframes slightZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation / Buttons -->
+    <!-- Navigation Buttons -->
     <nav>
         <a href="overview.html">Overview</a>
         <a href="requirements.html">Requirements</a>
@@ -110,10 +127,27 @@
         <a href="guides.html">Exclusive Guides</a>
     </nav>
 
-    <!-- Optional: Center content placeholder (like a visual focal point) -->
-    <div class="hero-content">
-        <!-- You can add some guild logo or animated icon here if you want -->
-    </div>
+    <!-- Particle Effects -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Optional central content -->
+    <div class="hero-content"></div>
+
+    <script>
+        // Generate subtle floating particles for depth
+        const particleContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.width = 2 + Math.random() * 6 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = 10 + Math.random() * 20 + 's';
+            particle.style.backgroundColor = ['#a13538', '#ff5555', '#ff8888'][Math.floor(Math.random()*3)];
+            particleContainer.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
-
